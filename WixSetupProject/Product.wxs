@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define NetStandardConsole_TargetDir=$(var.NetStandardConsole.TargetDir)?>
+  <?define NetStandardLibrary_TargetDir=$(var.NetStandardLibrary.TargetDir)?>
+	<Product Id="*" Name="WixSetupProject" Language="1033" Version="1.0.0.0" Manufacturer="Matt Vanecek" UpgradeCode="5605f777-80d0-4e61-9f95-1d2467f7f2c3">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="WixSetupProject" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="WixSetupProject" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+			<Component Id="NetStandardConsole.exe" Guid="e9b42518-5539-4872-9d55-899ddf70e150">
+			  <File Id="NetStandardConsole.exe" Name="NetStandardConsole.exe" Source="$(var.NetStandardConsole_TargetDir)NetStandardConsole.exe" />
+			</Component>
+			<Component Id="CommandLine.dll" Guid="14718317-7cdf-4a1f-9b1d-c88c38cab8d9">
+			  <File Id="CommandLine.dll" Name="CommandLine.dll" Source="$(var.NetStandardConsole_TargetDir)CommandLine.dll" />
+			</Component>
+			<Component Id="NetStandardLibrary.dll" Guid="614db1b3-da7e-4fe6-972f-1fee4ed3879a">
+			  <File Id="NetStandardLibrary.dll" Name="NetStandardLibrary.dll" Source="$(var.NetStandardLibrary_TargetDir)NetStandardLibrary.dll" />
+			</Component>
+			<Component Id="netstandard.dll" Guid="068b359f-6cd4-4393-a495-b3c5835aa46d">
+			  <File Id="netstandard.dll" Name="netstandard.dll" Source="$(var.NetStandardConsole_TargetDir)netstandard.dll" />
+			</Component>
+			<Component Id="System.Diagnostics.Tracing.dll" Guid="8b42c932-f522-4873-a4ea-c0f10ce45361">
+			  <File Id="System.Diagnostics.Tracing.dll" Name="System.Diagnostics.Tracing.dll" Source="$(var.NetStandardConsole_TargetDir)System.Diagnostics.Tracing.dll" />
+			</Component>
+			<Component Id="System.IO.Compression.dll" Guid="8c374cad-6fac-4b46-aac0-dfc93871c407">
+			  <File Id="System.IO.Compression.dll" Name="System.IO.Compression.dll" Source="$(var.NetStandardConsole_TargetDir)System.IO.Compression.dll" />
+			</Component>
+			<Component Id="System.Net.Http.dll" Guid="98648eae-5ea5-404d-959f-307d8b0d537e">
+			  <File Id="System.Net.Http.dll" Name="System.Net.Http.dll" Source="$(var.NetStandardConsole_TargetDir)System.Net.Http.dll" />
+			</Component>
+			<Component Id="NetStandardConsole.exe.config" Guid="b299c7e9-5137-42e5-bd34-fd10d0312591">
+			  <File Id="NetStandardConsole.exe.config" Name="NetStandardConsole.exe.config" Source="$(var.NetStandardConsole_TargetDir)NetStandardConsole.exe.config" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
